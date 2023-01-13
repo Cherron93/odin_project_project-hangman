@@ -8,6 +8,7 @@ class Hangman
     puts @word
     @word_array = @word.split('')
     @mistakes = 0
+    @wrong_letters = []
     set_up_board
     play_game
   end
@@ -20,6 +21,8 @@ class Hangman
 
   def play_game
     if @mistakes < 7
+      puts "Wrong letters: #{@wrong_letters.join(' ')}"
+      puts @board_array.join(' ')
       answer = get_user_input
       if @word_array.include?(answer)
         puts 'Correct!'
@@ -27,6 +30,7 @@ class Hangman
         check_victory
         play_game
       else
+        @wrong_letters.push(answer)
         @mistakes += 1
         puts "Wrong! That's #{@mistakes}/7 mistakes."
         play_game
@@ -40,7 +44,6 @@ class Hangman
     @word_array.each_with_index do |element, index|
       @board_array[index] = answer if element == answer
     end
-    puts @board_array.join(' ')
   end
 
   def check_victory
