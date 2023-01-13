@@ -19,22 +19,34 @@ class Hangman
   end
 
   def play_game
-    while @mistakes < 7
+    if @mistakes < 7
       answer = get_user_input
       if @word_array.include?(answer)
         puts 'Correct!'
         update_board(answer)
+        check_victory
+        play_game
       else
         @mistakes += 1
         puts "Wrong! That's #{@mistakes}/7 mistakes."
+        play_game
       end
+    elsif @mistakes == 7
+      puts "Game over, #{player_name} - you loooose!"
     end
   end
 
   def update_board(answer)
-    position = @word_array.find_index(answer)
-    @board_array[position] = answer
+    @word_array.each_with_index do |element, index|
+      @board_array[index] = answer if element == answer
+    end
     puts @board_array.join(' ')
+  end
+
+  def check_victory
+    return unless @board_array == @word_array
+
+    puts "Game over! #{player_name} is victorious!"
   end
 
   def get_user_input
