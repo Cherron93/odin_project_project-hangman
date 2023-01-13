@@ -1,0 +1,21 @@
+--- !ruby/object:Hangman
+player_name: Colin
+board_array:
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+word: bahrain
+word_array:
+- b
+- a
+- h
+- r
+- a
+- i
+- "n"
+mistakes: 0
+wrong_letters: []
