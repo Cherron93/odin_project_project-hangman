@@ -5,7 +5,6 @@ class Hangman
     @player_name = player_name
     @board_array = []
     @word = generate_word
-    puts @word
     @word_array = @word.split('')
     @mistakes = 0
     @wrong_letters = []
@@ -21,9 +20,9 @@ class Hangman
 
   def play_game
     if @mistakes < 7
-      puts "Wrong letters: #{@wrong_letters.join(' ')}"
-      puts @board_array.join(' ')
-      answer = get_user_input
+      puts "\nWrong letters: #{@wrong_letters.join(' ')}"
+      puts "\n#{@board_array.join(' ')}"
+      answer = get_user_input.downcase
       if @word_array.include?(answer)
         puts 'Correct!'
         update_board(answer)
@@ -32,11 +31,11 @@ class Hangman
       else
         @wrong_letters.push(answer)
         @mistakes += 1
-        puts "Wrong! That's #{@mistakes}/7 mistakes."
+        puts "\nWrong! That's #{@mistakes}/7 mistakes."
         play_game
       end
     elsif @mistakes == 7
-      puts "Game over, #{player_name} - you loooose!"
+      puts "\nGame over, #{@player_name} - you loooose!"
     end
   end
 
@@ -49,19 +48,17 @@ class Hangman
   def check_victory
     return unless @board_array == @word_array
 
-    puts "Game over! #{player_name} is victorious!"
+    puts "Game over! #{@player_name} is victorious!"
   end
 
   def get_user_input
-    puts 'Take a guess'
+    puts "\nTake a guess"
     user_input = gets.chomp
   end
 
-  # figure out a way to print a nicer lookign board!
   def set_up_board
     @word.length.times do
       @board_array.push('_')
     end
-    puts @board_array.join(' ')
   end
 end
