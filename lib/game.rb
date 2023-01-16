@@ -1,5 +1,12 @@
-require 'yaml'
+# frozen_string_literal: true
 
+# figure out how to to load in game
+# Fi
+
+require 'yaml'
+require 'pry-byebug'
+
+# Initiates and plays hangman
 class Hangman
   DICTIONARY = File.read('google-10000-english-no-swears.txt').split(' ')
 
@@ -25,9 +32,7 @@ class Hangman
     if @mistakes < 7
       puts "\nWrong letters: #{@wrong_letters.join(' ')}"
       puts "\n#{@board_array.join(' ')}"
-      answer = get_user_input.downcase
-      save_game if answer == 'save'
-      load_game if answer == 'load'
+      answer = get_answer
       if @word_array.include?(answer)
         puts 'Correct!'
         update_board(answer)
@@ -42,6 +47,16 @@ class Hangman
     elsif @mistakes == 7
       puts "\nGame over, #{@player_name} - you loooose!"
     end
+  end
+
+  def get_answer
+    # binding.pry
+    answer = get_user_input.downcase
+    save_game if answer == 'save'
+    load_game if answer == 'load'
+    play_game if %w[save load].include?(answer)
+    answer = answer.chr if answer.length > 1
+    answer
   end
 
   def update_board(answer)
@@ -68,17 +83,24 @@ class Hangman
   end
 
   def save_game
-    filename = "saved_games/#{@player_name}.txt"
-    File.open(filename, 'w') { |file| file.write(to_yaml) }
+    filename = []
+    filename = "saved_games/#{@player_name}.yml"
+    File.open(filename, 'w') { |f| YAML.dump([] << self, f) }
     puts 'Game saved!'
   end
 
   # Once you get it to load correctly, it should have a welcome back message, tell you score, letters, etc.
   def load_game
-    filename = "saved_games/#{@player_name}.txt"
-    game_file = File.open(filename, 'r') { |file| file.read }
-    game = YAML.load(game_file)
-    puts 'Game loaded'
-    hangman.play_game
+    # p 'hi'
+    # binding.pry
+    saved_game = YAML.load(File.read("saved_games/#{@player_name}.yml"))
+    p saved_game
+
+    # filename = "saved_games/#{@player_name}.yaml"
+    # game_file = File.open(filename, 'r') { |file| file.read }
+    # game = YAML.load(game_file)
+    # puts 'Game loaded'
+    # game_file.close
+    # game
   end
 end

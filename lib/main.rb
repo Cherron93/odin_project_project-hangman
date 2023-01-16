@@ -1,3 +1,4 @@
-require_relative 'game.rb'
+require_relative 'game'
 
-Hangman.new("Colin")
+game = Hangman.new('Colin')
+game.play_game
