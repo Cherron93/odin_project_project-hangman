@@ -2,7 +2,6 @@
 
 require 'yaml'
 require 'pry-byebug'
-require_relative 'psych'
 
 class Hangman
   DICTIONARY = File.read('google-10000-english-no-swears.txt').split(' ')
@@ -47,7 +46,6 @@ class Hangman
   end
 
   def get_answer
-    # binding.pry
     answer = get_user_input.downcase
     save_game if answer == 'save'
     load_game if answer == 'load'
@@ -83,11 +81,16 @@ class Hangman
     filename = []
     filename = "saved_games/#{@player_name}.yml"
     File.open(filename, 'w') { |f| YAML.dump([] << self, f) }
+    puts __FILE__
     puts 'Game saved!'
   end
 
   def load_game
-    yaml = YAML.load_file("saved_games/#{@player_name}.yml")
+    # yaml = YAML.load_file("saved_games/#{@player_name}.yml", permitted_classes: [Hangman])
+    # p yaml
+    # yaml = YAML.load_file(File.read("saved_games/#{@player_name}.yml"), permitted_classes: [Hangman])
+    # p yaml
+    yaml = YAML.load_file(File.read("saved_games/#{@player_name}.yml"))
     @player_name = yaml[0].player_name
     @board_array = yaml[0].board_array
     @word = yaml[0].word

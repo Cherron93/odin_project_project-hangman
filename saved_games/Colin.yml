@@ -2,17 +2,27 @@
 - !ruby/object:Hangman
   player_name: Colin
   board_array:
+  - i
+  - _
+  - _
   - _
   - a
   - _
   - _
+  - e
   - _
-  word: wagon
+  word: instances
   word_array:
-  - w
-  - a
-  - g
-  - o
+  - i
   - "n"
-  mistakes: 0
-  wrong_letters: []
+  - s
+  - t
+  - a
+  - "n"
+  - c
+  - e
+  - s
+  mistakes: 2
+  wrong_letters:
+  - o
+  - u
