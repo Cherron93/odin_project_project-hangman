@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-# figure out how to to load in game
-# Fi
-
 require 'yaml'
 require 'pry-byebug'
+require_relative 'psych'
 
-# Initiates and plays hangman
 class Hangman
   DICTIONARY = File.read('google-10000-english-no-swears.txt').split(' ')
 
@@ -89,18 +86,14 @@ class Hangman
     puts 'Game saved!'
   end
 
-  # Once you get it to load correctly, it should have a welcome back message, tell you score, letters, etc.
   def load_game
-    # p 'hi'
-    # binding.pry
-    saved_game = YAML.load(File.read("saved_games/#{@player_name}.yml"))
-    p saved_game
-
-    # filename = "saved_games/#{@player_name}.yaml"
-    # game_file = File.open(filename, 'r') { |file| file.read }
-    # game = YAML.load(game_file)
-    # puts 'Game loaded'
-    # game_file.close
-    # game
+    yaml = YAML.load_file("saved_games/#{@player_name}.yml")
+    @player_name = yaml[0].player_name
+    @board_array = yaml[0].board_array
+    @word = yaml[0].word
+    @word_array = yaml[0].board_array
+    @mistakes = yaml[0].mistakes
+    @wrong_letters = yaml[0].wrongletters
+    puts 'Game loaded!'
   end
 end

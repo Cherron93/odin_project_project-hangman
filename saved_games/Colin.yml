@@ -3,28 +3,16 @@
   player_name: Colin
   board_array:
   - _
-  - u
-  - _
-  - i
-  - _
-  - e
-  - _
-  - _
-  - e
-  - _
-  word: businesses
-  word_array:
-  - b
-  - u
-  - s
-  - i
-  - "n"
-  - e
-  - s
-  - s
-  - e
-  - s
-  mistakes: 2
-  wrong_letters:
   - a
+  - _
+  - _
+  - _
+  word: wagon
+  word_array:
+  - w
+  - a
+  - g
   - o
+  - "n"
+  mistakes: 0
+  wrong_letters: []
