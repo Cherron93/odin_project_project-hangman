@@ -1,0 +1,25 @@
+---
+- !ruby/object:Hangman
+  player_name: Colin
+  board_array:
+  - _
+  - _
+  - e
+  - a
+  - _
+  - e
+  - _
+  word: greater
+  word_array:
+  - g
+  - r
+  - e
+  - a
+  - t
+  - e
+  - r
+  mistakes: 3
+  wrong_letters:
+  - i
+  - o
+  - u

@@ -13,7 +13,6 @@ class Hangman
     @word_array = @word.split('')
     @mistakes = 0
     @wrong_letters = []
-
     set_up_board
     play_game
   end
@@ -79,9 +78,9 @@ class Hangman
 
   def save_game
     filename = []
-    filename = "saved_games/#{@player_name}.yml"
+    # filename = "saved_games/#{@player_name}.yml"
+    filename = "#{@player_name}.yml"
     File.open(filename, 'w') { |f| YAML.dump([] << self, f) }
-    puts __FILE__
     puts 'Game saved!'
   end
 
@@ -90,7 +89,12 @@ class Hangman
     # p yaml
     # yaml = YAML.load_file(File.read("saved_games/#{@player_name}.yml"), permitted_classes: [Hangman])
     # p yaml
-    yaml = YAML.load_file(File.read("saved_games/#{@player_name}.yml"))
+    # save_file = File.read("#{@player_name}.yml")
+    # save_file = File.read(File.join(File.dirname(__FILE__), "#{@player_name}.yml"))
+    # yaml = YAML.load_file(save_file)
+    # save_file = File.read(File.join(File.dirname(__FILE__), "#{@player_name}.yml"))
+    # yaml = YAML.load_file(File.join(File.dirname(__FILE__), "#{@player_name}.yml"))
+    yaml = YAML.load_file(File.read("/home/colin/odin_project/ruby/hangman/odin_project_project-hangman/#{@player_name}.yml"))
     @player_name = yaml[0].player_name
     @board_array = yaml[0].board_array
     @word = yaml[0].word
